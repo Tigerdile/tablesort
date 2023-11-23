@@ -14,14 +14,17 @@ Out of the box, the sorter understands text sorting and numeric sorting; however
 # Usage
 Download the td-tablesort.js file, and include it thusly (after jQuery's include) :
 
+```
 <script src="td-tablesort.js" type="text/javascript"></script>
+```
 
 Then, you attach it to your tables thusly :
 
 jQuery('#tableSelector').tablesort();
 
-Your tables must be structured with a <thead> and <th> elements, thusly:
+Your tables must be structured with a ```<thead>``` and ```<th>``` elements, thusly:
 
+```
 <table id="tableSelector">
   <thead>
     <tr>
@@ -31,11 +34,14 @@ Your tables must be structured with a <thead> and <th> elements, thusly:
   </thead>
   <tbody></tbody>
 </table>
+```
 
-This will inject <a> elements around your column names in the <th>, which will capture the sorting clicks.  Whichever <a> element has the class 'active' will be the default sort, so you could do thusly:
+This will inject ```<a>``` elements around your column names in the ```<th>```, which will capture the sorting clicks.  Whichever ```<a>``` element has the class 'active' will be the default sort, so you could do thusly:
 
+```
 jQuery('#tableSelector').tablesort();
 jQuery('th#someColumnId a').addClass('active');
+```
 
 to make the column with header ID someColumnId the default sort column.  The class 'desc' on the a record will make it sort descending instead of the default ascending.
 
@@ -43,11 +49,13 @@ When you want to sort the table, you call the 'resort' method on the table objec
 
 For instance:
 
+```
 jQuery.get('/some/url', function(data) {
   // use data to populate the table
   var myTable = jQuery('#tableSelector');
   myTable.get(0).resort(myTable);
 });
+```
 
 'resort' will sort whatever column's th a is 'active'.  The sorted 'td' elements will have the class 'sorted' if you care to style that at all.
 
@@ -58,6 +66,7 @@ If "parseInt" understands your column of data to be entirely numeric, your data 
 
 If this very basic sorting is not acceptable, you can attach a custom sort method to your th elements.  The method should be called 'sortFunction' and it must take two parameters (the items to sort).  It works thusly :
 
+```
 jQuery('#tableSelector th#someColumnHeader').each(function() {
   this['sortFunction'] = function(a, b) {
     // return positive (i.e. 1) if a > b
@@ -65,6 +74,7 @@ jQuery('#tableSelector th#someColumnHeader').each(function() {
     // return negative (i.e. -1) if a < b
   };
 });
+```
 
 I use a .each because in my case, I use a CSS class on my th element and I have multiple tables that use the same sort functions.  You can override the sort function at any time.
 
